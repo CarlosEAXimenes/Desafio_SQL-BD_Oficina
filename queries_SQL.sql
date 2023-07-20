@@ -32,6 +32,16 @@ select * from carros order by marca asc, modelo asc;
 
 /*
     Quais são os clientes que têm mais de um carro cadastrado na tabela "carros"?
-    Quais são os serviços cujo valor é superior a R$ 200?
+    Liste os orçamentos, mostrando o nome do cliente e o modelo do carro para cada um.
 */
-select * from clientes cl, carros ca group by  having count(cl.id_cliente=ca.id_cliente_carro)>1;
+select cl.nome_cliente from clientes cl 
+inner join carros cr on cl.id_cliente = cr.id_cliente_carro
+group by cl.nome_cliente
+having count(cr.id_carro)>1;	
+
+SELECT o.id_orcamento, c.nome_cliente, car.modelo
+FROM orcamento o
+INNER JOIN clientes c ON o.id_cliente_orcamento = c.id_cliente
+INNER JOIN carros car ON o.id_carro_orcamento = car.id_carro;
+
+	
